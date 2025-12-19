@@ -19,13 +19,27 @@ const {errorHandler, throwError} = require(path.join(__dirname,"middleware","err
 
 const app = express();
 
+const allowedOrigins = [
+  process.env.CLIENT_UR,
+  "https://anushatesting-1.onrender.com"
+];
+
 // app middlewares *****************************************************
 
 app.use(express.json());
 app.use(express.urlencoded({extended : false}));
 app.use(cookieParser());
 app.use(cors({
-    origin:"http://localhost:5173",
+  origin: function (origin, callback) {
+      // allow requests with no origin (like Postman)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("CORS not allowed"));
+      }
+    },
     methods : ['GET','POST','PUT','DELETE'],
     allowedHeaders : [
         "Content-type",
