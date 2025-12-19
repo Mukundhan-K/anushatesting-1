@@ -38,6 +38,7 @@ const AdminView = lazy(() => import("./pages/AdminView"));
 const Projects = lazy(() => import("./pages/Projects"));
 
 function App() {
+// console.log(import.meta.env);
 
   const domlocation = useLocation();
   const dispatch = useDispatch();
