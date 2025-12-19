@@ -2,7 +2,7 @@ import React from 'react';
 
 // components
 import Hero from "../components/home/hero";
-import OurJourney from "../components/home/OurJourney";
+import OurJourney from "../components/home/ourjourney.jsx";
 import OurProcess from '../components/home/OurProcess';
 import Pricing from '../components/home/Pricing';
 import PhotoGallery from '../components/ui/PhotoGallery';
