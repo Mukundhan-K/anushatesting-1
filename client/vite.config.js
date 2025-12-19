@@ -13,7 +13,6 @@ export default defineConfig({
   ],
 
   base: '/',
-
   
   build: {
     cssCodeSplit: true,
@@ -27,5 +26,9 @@ export default defineConfig({
         },
       },
     },
+  },
+
+  server: {
+    historyApiFallback: true
   }
 })
