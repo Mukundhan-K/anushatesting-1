@@ -84,9 +84,9 @@ app.use((req, res, next) => {
 
 // url - routes *****************************************************
 
-// app.use("/",(req,res)=>{
-//     res.status(200).json({text : "this is home page" + req.originalUrl})
-// });
+    app.get("/", (req, res) => {
+      res.send("Backend is running 🚀");
+    });
 
     //  auth ---------------------------------
     app.use("/api/auth", authRoutes);
