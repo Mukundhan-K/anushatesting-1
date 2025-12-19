@@ -1,0 +1,106 @@
+# -----------------------------------------
+# robots.txt for BuildRight Construction
+# -----------------------------------------
+
+# Allow all well-behaved crawlers
+User-agent: *
+Allow: /
+
+# -----------------------------------------
+# Block pages that shouldn't appear in search
+# -----------------------------------------
+# Example: Admin, login pages, and test routes
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /login/
+Disallow: /register/
+Disallow: /thank-you/
+Disallow: /private/
+Disallow: /api/
+Disallow: /cgi-bin/
+Disallow: /pdf/
+Disallow: /img/
+Disallow: /404/
+Disallow: /pagenotfound/
+Disallow: /temp/
+
+# ✅ Disallow old or temporary files
+Disallow: /backup/
+Disallow: /temp/
+Disallow: /test/
+
+# 🧱 Block build and static files (React internal)
+# -----------------------------------------
+Disallow: /static/
+Disallow: /build/
+Disallow: /assets/
+
+
+# Prevent crawling of search query parameters
+# (Helps avoid duplicate content issues)
+# -----------------------------------------
+
+Disallow: /*?*
+Disallow: /*&*
+
+# -----------------------------------------
+# Allow important public pages
+# -----------------------------------------
+
+Allow: /projects
+Allow: /contact
+Allow: /about
+Allow: /services
+Allow: /cost-estimator
+Allow: /home
+
+# -----------------------------------------
+# Sitemap (very important for SEO)
+# Update this URL to your actual domain
+# -----------------------------------------
+Sitemap: https://www.anushastructures.in/sitemap.xml
+
+# -----------------------------------------
+# Crawling delay (optional for smaller sites)
+# Uncomment if you notice server overload
+# Crawl-delay: 10
+# -----------------------------------------
+
+
+User-agent: Googlebot
+Allow: /
+
+# ✅ Allow Google Image bot, Ads bot, etc.
+User-agent: Googlebot-Image
+Allow: /
+User-agent: AdsBot-Google
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+
+# -----------------------------------------
+# Block specific bad bots (optional)
+# -----------------------------------------
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# -----------------------------------------
+# End of robots.txt
+# -----------------------------------------

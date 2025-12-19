@@ -1,0 +1,641 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Outfit:wght@100..900&display=swap'); */
+@import "tailwindcss";
+
+@theme{
+    --color-a-royalsafforn : #E68900;
+    /* --color-a-royalsafforn : #026f41; */
+    --color-a-green : #026f41;
+    --color-bg-brown : #F3F4F6;
+
+    --font-outfit : "Outfit", serif;
+    --font-josefin : "Josefin Sans", sans-serif;
+
+    --breakpoint-xs: 28rem;
+    --breakpoint-xsl: 35rem;
+}
+
+@layer base{
+  body{
+    @apply font-outfit;
+    font-display: swap;
+  }
+  h1,h2,h3,h4,h5,h6{
+    @apply font-josefin capitalize font-semibold;
+  }
+  p,span{
+    @apply font-outfit;
+  }
+
+}
+@layer components{
+  .button-m{
+    @apply py-1;  
+  }
+
+  .btn-pill{
+    @apply py-4 px-6 rounded-full font-bold capitalize;
+  }
+
+  .f-c-5{
+    @apply flex justify-center items-center gap-5;
+  }
+  .siteHeading{
+    @apply font-josefin font-bold capitalize;
+  }
+
+  /* navbar  ---------------------------------------------- */
+
+  .navlinks{
+    @apply text-base font-outfit;
+  }
+
+  #imagesUpload label{
+    @apply p-5;
+  }
+  #imagesUpload label img{
+    @apply object-contain size-10 md:size-20 lg:size-32;
+  }
+
+}
+
+
+/* //////////////////////////////////////////////////////////////////////// */
+/* custom css  ---------------------------------------------- */
+/* //////////////////////////////////////////////////////////////////////// */
+
+/* hero page  ---------------------------------------------- */
+
+#hero{
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)), url(./assets//hero.webp);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#hero .container{
+  height: calc(100% + 200px);
+  /* margin-top: -144px; */
+}
+
+#footer{
+  background-image: url(./assets/footer-1.webp);
+}
+#aboutCnt{
+  background-image: url(./assets/about/team.webp);
+}
+#count-1{
+  background-image: url(./assets/about/counter-1.webp);
+}
+#count-2{
+  background-image: url(./assets/about/counter.webp);
+}
+#banner{
+  background-image: url(./assets/banner.webp);
+}
+#costEst{
+  background-image: url(./assets/ourprojects/2.webp);
+}
+#serAbt{
+  background-image: url(./assets/about/team-2.webp);
+}
+#ourJour{
+  background-image: url(./assets/our-journey-1.webp);
+}
+
+/* our process  ---------------------------------------------- */
+
+@media screen and (min-width: 1024px){
+  #ourProcess .cardGrp::before{
+    content: "";
+
+    height: 1px;
+    width: 150vw;
+    background-color: #0005;
+    
+    position: absolute;
+    top: 153px;
+    left: -50vw;
+    z-index: 10;
+  }
+}
+
+/* home contact form  ---------------------------------------------- */
+
+  .homeContact::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-image: url('./assets//contactform-2.webp');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.2; /* Adjust as needed */
+    height: 100%;
+    width: 100%;
+    z-index: 0;
+  }
+
+/* banner  ---------------------------------------------- */
+
+
+/* common css  ---------------------------------------------- */
+
+  .img-pill{
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    overflow: auto;
+  }
+
+  .imp-pill > img{
+    display: block;
+    width: 100%;
+    border-radius: 100px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .curve{
+    position: absolute;
+    clip-path: path("M0 0 Q0,30 30,30 L 0 30 Z");
+  }
+
+  .writing-mode{
+    writing-mode: vertical-rl;
+  }
+  .text-orientation-mixed{
+    text-orientation: mixed;
+  }
+  /* .writing-mode{
+    writing-mode: vertical-rl;
+  } */
+
+
+/* back to top  ---------------------------------------------- */
+
+/* From Uiverse.io by vinodjangid07 */ 
+#backtotop {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color:  var(--color-a-green);
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 0px 4px rgba(6, 178, 66, 0.253);
+  cursor: pointer;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  position: relative;
+    z-index: 55;
+
+}
+
+#backtotop .svgIcon {
+  width: 12px;
+  transition-duration: 0.3s;
+}
+
+#backtotop .svgIcon path {
+  fill: white;
+}
+
+#backtotop:hover {
+  width: 140px;
+  border-radius: 50px;
+  transition-duration: 0.3s;
+  background-color: var(--color-a-green);
+  align-items: center;
+}
+
+#backtotop:hover .svgIcon {
+  /* width: 20px; */
+  transition-duration: 0.3s;
+  transform: translateY(-300%);
+}
+
+#backtotop::before {
+  position: absolute;
+  bottom: -20px;
+  content: "Back to Top";
+  color: white;
+  /* transition-duration: .3s; */
+  font-size: 0px;
+}
+
+#backtotop:hover::before {
+  opacity: 1;
+  bottom: unset;
+  /* transform: translateY(-30px); */
+  transition-duration: 0.3s;
+    font-size: 18px;
+
+}
+
+/* whatsapp btn  ---------------------------------------------- */
+
+#whatsBtn  {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition-duration: 0.3s;
+    box-shadow: 0px 0px 0px 4px rgba(146, 246, 177, 0.53);
+
+  background-color: #00d757;
+  z-index: 55;
+}
+
+#whatsBtn .sign {
+  width: 100%;
+  transition-duration: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#whatsBtn .sign svg {
+  width: 25px;
+}
+
+#whatsBtn .sign svg path {
+  fill: white;
+}
+#whatsBtn .text {
+  position: absolute;
+  right: 0%;
+  width: 0%;
+  opacity: 0;
+  color: white;
+  font-weight: 600;
+  transition-duration: 0.3s;
+}
+
+#whatsBtn:hover {
+  width: 150px;
+  border-radius: 40px;
+  transition-duration: 0.3s;
+}
+
+#whatsBtn:hover .sign {
+  width: 30%;
+  transition-duration: 0.3s;
+  padding-left: 10px;
+}
+
+#whatsBtn:hover .text {
+  opacity: 1;
+  width: 70%;
+  transition-duration: 0.3s;
+  padding-right: 10px;
+}
+#whatsBtn:active {
+  transform: translate(2px, 2px);
+}
+
+
+@media screen and (max-width: 750px){
+  #whatsBtn,
+  #backtotop{
+    width: 40px;
+    height: 40px;
+  }
+  #whatsBtn .sign svg {
+    width: 25px;
+  }
+
+}
+
+
+/* animated css  ---------------------------------------------- */
+
+/* From Uiverse.io by satyamchaudharydev */ 
+.style-underline {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.style-underline {
+  --primary-color: #111;
+  --hovered-color: var(--color-a-royalsafforn);
+  position: relative;
+}
+
+.style-underline::after {
+  position: absolute;
+  content: "";
+  width: 0;
+  left: 0;
+  bottom: 0px;
+  background: var(--hovered-color);
+  height: 2px;
+  transition: 0.3s ease-out;
+}
+
+.style-underline:hover::after {
+  width: 100%;
+}
+
+.navlinks.active{
+  /* border-bottom: 2px solid var(--color-a-royalsafforn); */
+}
+/* .navlinks.active:hover::after{
+  position: static; 
+} */
+.navlinks.active::after{
+  /* position: static; */
+  width: 100%;
+  background: var(--color-a-green);
+}
+
+
+/* arrow button */
+
+/* From Uiverse.io by Creatlydev */ 
+.buttonArrow {
+  line-height: 1;
+  text-decoration: none;
+  display: inline-flex;
+  border: none;
+  cursor: pointer;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 10rem;
+  font-weight: 600;
+  padding: 0.5rem 0.75rem 0.5rem 1.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background-color 0.3s;
+}
+
+.buttonArrow__icon-wrapper {
+  flex-shrink: 0;
+  width: 45px;
+  height: 45px;
+  position: relative;
+  color: #000;
+  background-color: #fff;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+/* .buttonArrow:hover {
+  background-color: #000;
+} */
+
+/* .buttonArrow:hover .buttonArrow__icon-wrapper {
+  color: #000;
+} */
+
+.button__icon-svg--copy {
+  position: absolute;
+  transform: translate(-150%, 150%);
+}
+
+.buttonArrow:hover .button__icon-svg:first-child {
+  transition: transform 0.3s ease-in-out;
+  transform: translate(150%, -150%);
+}
+
+.buttonArrow:hover .button__icon-svg--copy {
+  transition: transform 0.3s ease-in-out 0.1s;
+  transform: translate(0);
+}
+
+/* animation - toogle btn  ---------------------------------------------- */
+
+/* From Uiverse.io by MuhammadHasann */ 
+.toggle-cont {
+  width: 100px;
+  height: 50px;
+  border-radius: 9999px;
+}
+
+.toggle-cont .toggle-input {
+  display: none;
+}
+
+.toggle-cont .toggle-label {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  padding: 6px;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  border-radius: 9999px;
+  box-sizing: content-box;
+  /* box-shadow: 0px 0px 16px -8px #fefefe; */
+}
+
+.toggle-cont .toggle-label .cont-label-play {
+  position: relative;
+  width: 50px;
+  aspect-ratio: 1 / 1;
+  /* background: #FFD700; */
+  border-radius: 9999px;
+  /* border: 1px solid #0008; */
+  transition: all 0.5s cubic-bezier(1, 0, 0, 1);
+}
+
+.toggle-cont .toggle-input:checked + .toggle-label .cont-label-play {
+  transform: translateX(50px);
+}
+
+.toggle-cont .toggle-label .label-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+  width: 50px;
+  aspect-ratio: 1 / 1;
+  /* background: #0003; */
+  border-radius: 40px;
+  /* clip-path: polygon(25% 0, 75% 50%, 25% 100%, 25% 51%); */
+  transition: all 0.5s cubic-bezier(1, 0, 0, 1);
+}
+
+/* .toggle-cont .toggle-input:checked + .toggle-label .label-play {
+  width: 20px;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+} */
+
+
+/* animation - marquee  ---------------------------------------------- */
+
+/* IMPORTANT NOTES */
+/* .marquee-wrapper must be at least 2x larger than combined widths of all li elements inside .marquee */
+/* .marquee must be at least 2x larger than .marquee-wrapper including the borders on .marquee-wrapper e.g. border-left: 2px and border-right: 2px in this codepen*/
+
+/* 
+  WIDTH CALCULATION EXAMPLE
+  ul and .marquee widths are dependent on the number of li and their widths.
+      For 3 li w/ 100px width and 2 ul:
+        - Fixed length of each ul should be equal to: 3 li @ 100px each * 2 ul = 600px 
+        - Minimum width of .marquee should be equal to: 3 li @ 100px + 4px for left and right border = 304px 
+*/
+
+
+.marquee-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 30px;
+  width: 152px;
+  border-radius: 50px;
+  overflow: hidden;
+  white-space: nowrap;
+  background: transparent;
+}
+
+.marquee {
+  position: absolute;
+  display: block;
+  width: 200%;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  animation: marquee-scrolling 4s linear infinite;
+  -webkit-animation: marquee-scrolling 4s linear infinite;
+}
+
+.marquee ul {
+  width: 300px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.marquee ul li {
+  float: left;
+  width: 150px;
+  background: transparent;
+  overflow: hidden;
+}
+
+@keyframes marquee-scrolling {
+  0% {
+    left: 0;
+  }
+
+  100% {
+    left: -100%;
+  }
+}
+
+/* animation - marquee slider  ---------------------------------------------- */
+
+.stock-ticker {
+  font-size: 15px;
+  padding-block: 8px;
+  overflow: hidden;
+  user-select: none;
+
+  --gap: 20px;
+  display: flex;
+  gap: var(--gap);
+}
+
+.stock-ticker ul {
+  list-style: none;
+  flex-shrink: 0;
+  min-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--gap);
+
+  animation: scroll 30s linear infinite;
+}
+
+.stock-ticker:hover ul {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+.animation-forward{
+  animation-direction: reverse !important;
+}
+
+/* animation - popup open/close  ---------------------------------------------- */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out;
+}
+
+/*   ---------------------------------------------- */
+/* GLOBAL SCROLLBAR — Works for All Elements, All Directions */
+
+* {
+  scrollbar-width: thin;                 /* Firefox */
+}
+
+/* Chrome, Edge, Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px; /* Horizontal scrollbar */
+  background-color: #d9f2e7; /* very light greenish track */
+}
+
+*::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+	border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  	background-color: #3366FF;
+	border-radius: 10px;
+	background-image: -webkit-linear-gradient(0deg,
+                        rgba(255, 255, 255, 0.5) 25%,
+											  transparent 25%,
+											  transparent 50%,
+											  rgba(255, 255, 255, 0.5) 50%,
+											  rgba(255, 255, 255, 0.5) 75%,
+											  transparent 75%,
+											  transparent)
+}
+
+
+/* Hover effect */
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-a-royalsafforn)!important; /* lighter variant */
+}
+
+
+
+

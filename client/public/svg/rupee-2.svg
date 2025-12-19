@@ -1,0 +1,55 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Shield outline -->
+  <path
+    d="M24 4C24 4 36 7 40 14C40 26 33 36 24 42C15 36 8 26 8 14C12 7 24 4 24 4Z"
+    fill="#FFFFFF"
+    stroke="#111827"
+    stroke-width="1.8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  
+  <!-- Inner accent ring -->
+  <path
+    d="M24 7.2C24 7.2 34 9.4 37.3333 14C37.3333 23 31 31 24 36C17 31 10.6667 23 10.6667 14C14 9.4 24 7.2 24 7.2Z"
+    fill="none"
+    stroke="#E68900"
+    stroke-width="1.6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    opacity="0.95"
+  />
+
+  <!-- Padlock -->
+  <rect
+    x="16"
+    y="18.5"
+    width="16"
+    height="11"
+    rx="2"
+    fill="#FFFFFF"
+    stroke="#111827"
+    stroke-width="1.4"
+  />
+  <path
+    d="M20 18.5V15.8C20 13.2 24 12 24 12C24 12 28 13.2 28 15.8V18.5"
+    stroke="#111827"
+    stroke-width="1.4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"
+  />
+
+  <!-- Rupee symbol -->
+  <text
+    x="24"
+    y="26.8"
+    text-anchor="middle"
+    font-family="Inter, Arial, sans-serif"
+    font-weight="700"
+    font-size="8.8"
+    fill="#E68900"
+  >
+    ₹
+  </text>
+</svg>
