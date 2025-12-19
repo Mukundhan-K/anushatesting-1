@@ -20,9 +20,14 @@ const {errorHandler, throwError} = require(path.join(__dirname,"middleware","err
 const app = express();
 
 const allowedOrigins = [
-  process.env.CLIENT_UR,
-  "https://anushatesting-1.onrender.com"
-];
+  process.env.CLIENT_URL,
+  "https://anushatesting-1-front.onrender.com",
+  "https://anushatesting-1.onrender.com",
+  "http://localhost:5173" // keep for local dev
+].filter(Boolean); // 🔥 removes undefined values
+
+
+console.log("cleint url : ", process.env.CLIENT_URL,allowedOrigins);
 
 // app middlewares *****************************************************
 
@@ -30,15 +35,16 @@ app.use(express.json());
 app.use(express.urlencoded({extended : false}));
 app.use(cookieParser());
 app.use(cors({
-  origin: function (origin, callback) {
-      // allow requests with no origin (like Postman)
+  origin: (origin, callback) => {
+      // allow server-to-server, postman, render health checks
       if (!origin) return callback(null, true);
 
       if (allowedOrigins.includes(origin)) {
-        return  callback(null, true);
-      } else {
-        return callback(new Error("CORS not allowed"));
+        return callback(null, true);
       }
+
+      // ❌ DO NOT throw error (causes deployment/runtime issues)
+      return callback(null, false);
     },
     methods : ['GET','POST','PUT','DELETE'],
     allowedHeaders : [
