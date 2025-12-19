@@ -23,6 +23,7 @@ const allowedOrigins = [
   process.env.CLIENT_URL,
   "https://anushatesting-1-front.onrender.com",
   "https://anushatesting-1.onrender.com",
+  "https://anushatesting.netlify.app/",
   "http://localhost:5173" // keep for local dev
 ].filter(Boolean); // 🔥 removes undefined values
 
