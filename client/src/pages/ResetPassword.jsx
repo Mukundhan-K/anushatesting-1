@@ -13,7 +13,6 @@ const ResetPassword = () => {
     main: "",
     confirm : ""
   });
-  const [loading, setLoading] = useState(false);
 
   async function resetPass(e) {
     e.preventDefault();
@@ -26,7 +25,6 @@ const ResetPassword = () => {
     };
 
     try {
-      setLoading(true);
 
       const res = await Api.put(
         `/api/auth/resetPassword/${token}`,
@@ -40,8 +38,6 @@ const ResetPassword = () => {
 
     } catch (err) {
       toast.error(err.response?.data?.message || "Invalid or expired link");
-    } finally {
-      setLoading(false);
     }
   }
 
