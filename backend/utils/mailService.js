@@ -4,7 +4,7 @@ const adminEmailTemplate = require(path.join(__dirname, "mailTemplates", "adminM
 const clientReplyTemplate = require(path.join(__dirname, "mailTemplates", "clientReply.js"));
 const { throwError } = require(path.join(__dirname, "..", "middleware", "errorMiddleware.js"));
 
-async function sendMail({ name, email, subject, phone, message}, next) {
+async function sendMail({ name, email, subject, phone, message}) {
   console.log("ins mail : ", name, email, subject, phone, message);
 
   try {
@@ -43,12 +43,10 @@ async function sendMail({ name, email, subject, phone, message}, next) {
       html: clientReplyTemplate({ name: name }),
     });
 
-  // retrun 
     return true;
-
   } catch (error) {
     console.error("Mail error:", error);
-    return next(throwError("Failed to send email. Please try again later.", 500));
+    throw throwError("Failed to send email. Please try again later.", 500);
   }
 }
 
@@ -71,8 +69,8 @@ async function sendNormalMail({ email, subject, html}) {
       greetingTimeout: 10000,
       socketTimeout: 10000,
     });
-  await transporter.verify();
-console.log("SMTP connection successful");
+    await transporter.verify();
+    console.log("SMTP connection successful");
 
   /** Password Reset Email **/
     await transporter.sendMail({
@@ -82,12 +80,10 @@ console.log("SMTP connection successful");
       html: html,
     });
 
-  // retrun 
     return true;
-
   } catch (error) {
     console.error("Mail error:", error);
-    return next(throwError("Failed to send email. Please try again later.", 500));
+    throw throwError("Failed to send email. Please try again later.", 500);
   }
 }
 
