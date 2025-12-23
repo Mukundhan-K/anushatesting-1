@@ -4,18 +4,24 @@ const adminEmailTemplate = require(path.join(__dirname, "mailTemplates", "adminM
 const clientReplyTemplate = require(path.join(__dirname, "mailTemplates", "clientReply.js"));
 const { throwError } = require(path.join(__dirname, "..", "middleware", "errorMiddleware.js"));
 
-async function sendMail({ name, email, subject, phone, message}) {
+async function sendMail({ name, email, subject, phone, message}, next) {
   console.log("ins mail : ", name, email, subject, phone, message);
 
   try {
     const transporter = nodemailer.createTransport({
       host: process.env.MAIL_HOST,         // smtp.gmail.com
-      port: process.env.MAIL_PORT,         // 587
+      port: Number(process.env.MAIL_PORT),         // 587
       secure: false,
       auth: {
         user: process.env.MAIL_USER,       // your mail
         pass: process.env.MAIL_PASS,       // app password
       },
+      tls: {
+        rejectUnauthorized: false,
+      },
+      connectionTimeout: 10000, // 10 sec
+      greetingTimeout: 10000,
+      socketTimeout: 10000,
     });
 
   /** ADMIN MAIL **/
@@ -41,8 +47,8 @@ async function sendMail({ name, email, subject, phone, message}) {
     return true;
 
   } catch (error) {
-    console.error("Mail error:", error.message);
-    return throwError("Failed to send email. Please try again later.", 500);
+    console.error("Mail error:", error);
+    return next(throwError("Failed to send email. Please try again later.", 500));
   }
 }
 
@@ -52,12 +58,18 @@ async function sendNormalMail({ email, subject, html}) {
   try {
     const transporter = nodemailer.createTransport({
       host: process.env.MAIL_HOST,         // smtp.gmail.com
-      port: process.env.MAIL_PORT,         // 587
+      port:  Number(process.env.MAIL_PORT),         // 587
       secure: false,
       auth: {
         user: process.env.MAIL_USER,       // your mail
         pass: process.env.MAIL_PASS,       // app password
       },
+      tls: {
+        rejectUnauthorized: false,
+      },
+      connectionTimeout: 10000, // 10 sec
+      greetingTimeout: 10000,
+      socketTimeout: 10000,
     });
   await transporter.verify();
 console.log("SMTP connection successful");
@@ -74,8 +86,8 @@ console.log("SMTP connection successful");
     return true;
 
   } catch (error) {
-    console.error("Mail error:", error.message);
-    return throwError("Failed to send email. Please try again later.", 500);
+    console.error("Mail error:", error);
+    return next(throwError("Failed to send email. Please try again later.", 500));
   }
 }
 
