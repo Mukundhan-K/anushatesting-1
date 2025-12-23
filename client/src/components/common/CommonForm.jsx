@@ -11,6 +11,8 @@ const CommonForm = ({formControls, formData, setFormData, onsubmit, defaultOnSub
 }) => {
 
   const [result, setResult] = useState("");
+  const [showPassword, setShowPassword] = useState({});
+
   const domLocation = useLocation();
 
   function formDataHandler(e) {
@@ -113,13 +115,15 @@ const CommonForm = ({formControls, formData, setFormData, onsubmit, defaultOnSub
 
     switch (control.componentType) {
       case "input":
+        const isPassword = control?.type === "password";
+        const isVisible = showPassword[control.name];
         element = <div className={`bg-white border border-gray-400 px-4 py-0.5 rounded-2xl flex gap-3 items-center group focus-within:border-blue-500 focus-within:bg-blue-50 ${!isEdit && "bg-gray-100! cursor-not-allowed"}`}>
           {Icon && <img src={getImageSvg(Icon)} className="size-8 group-focus-within:stroke-blue-500"
             loading='lazy' alt={`${Icon} icon`} title={`icon of ${Icon}`}
           />}
 
           <input 
-            type={control?.type}
+            type={isPassword && isVisible ? "text" : control?.type}
             name={control?.name}
             id={control?.name}
             disabled={!isEdit}
@@ -132,6 +136,21 @@ const CommonForm = ({formControls, formData, setFormData, onsubmit, defaultOnSub
             aria-label={control?.name}
           />
 
+        {/* 👁️ Eye Toggle */}
+          {isPassword && (
+            <button
+              type="button"
+              onClick={() =>
+                setShowPassword((prev) => ({
+                  ...prev,
+                  [control.name]: !prev[control.name],
+                }))
+              }
+              className="text-gray-500 hover:text-gray-700"
+            >
+              {isVisible ? "🙈" : "👁️"}
+            </button>
+          )}
         </div>
         break;
 

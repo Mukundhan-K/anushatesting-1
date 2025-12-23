@@ -151,7 +151,7 @@ async function authUser(req, res, next) {
 async function forgotPassword(req, res, next){
   try {
     const { email } = req.body;
-    // console.log("email : ", email);
+    console.log("email : ", email);
     
     const user = await userDb.findOne({ email });
     console.log("user : ", user);
