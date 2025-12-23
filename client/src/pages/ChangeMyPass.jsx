@@ -60,7 +60,7 @@ async function submitForgot() {
           </div>
 
             <p className='text-center'>
-              <span className='font-medium select-none'>Redirect to Login </span>
+              <span className='font-medium select-none'>Redirect to Login</span>
               <span className='cursor-pointer text-a-royalsafforn text-primary font-medium select-none' onClick={()=>navigate("/login", { replace: true })}>Click here</span>
             </p>
 
