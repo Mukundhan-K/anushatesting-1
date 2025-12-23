@@ -83,7 +83,7 @@ async function sendNormalMail({ email, subject, html}) {
     return true;
   } catch (error) {
     console.error("Mail error:", error);
-    throw throwError("Failed to send email. Please try again later.", 500);
+    throw throwError("Failed to send email. Please try again later."+error, 500);
   }
 }
 
