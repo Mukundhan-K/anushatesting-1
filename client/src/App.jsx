@@ -32,7 +32,7 @@ import Login from './pages/Login';
 
 import { checkUser } from './redux/authSlice';
 import Loader from "./components/common/Loader";
-import ChangeMyPass from './pages/changeMyPass';
+import ChangeMyPass from './pages/ChangeMyPass';
 import ResetPassword  from './pages/ResetPassword';
 
 const Home = lazy(() => import("./pages/home"));
