@@ -44,6 +44,34 @@ export const loginFormControl = [
     },
 ];
 
+export const resetFormControl = [
+    {
+        name : "email",
+        label : "Email",
+        placeholder : "Enter your Mail",
+        componentType : "input",
+        type : "email",
+        // icon : AtSign
+    }
+];
+
+export const resetPasswordControl = [
+    {
+        name : "main",
+        label : "Enter Password",
+        placeholder : "Enter new password",
+        componentType : "input",
+        type : "password",
+    },
+    {
+        name : "confirm",
+        label : "Re-enter Password",
+        placeholder : "Enter Confirm password",
+        componentType : "input",
+        type : "password",
+    }
+];
+
 export const addProductFormElements = [
   {
     label: "Title",

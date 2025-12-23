@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import { useNavigate } from "react-router-dom";
+import React, {useCallback, useState} from 'react';
+import { Navigate, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from 'sonner';
 
@@ -90,9 +90,11 @@ function Login() {
 function loginStateChanger() {
     // setisLoginForm((prev)=>(!prev));
     setFormData({});
-  };
+};
 
-
+  const sendtoreset = useCallback(() => {  
+    return navigate("/changemypass", { replace: true });
+  }, []);
 
   return (<>
 
@@ -126,7 +128,7 @@ function loginStateChanger() {
 
             <p className='text-center'>
               <span className='font-medium select-none'>Forget Password ? </span>
-              <span className='cursor-pointer text-a-royalsafforn text-primary font-medium select-none' onClick={()=>loginStateChanger()}>Click here</span>
+              <span className='cursor-pointer text-a-royalsafforn text-primary font-medium select-none' onClick={sendtoreset}>Click here</span>
             </p>
 
         </div>

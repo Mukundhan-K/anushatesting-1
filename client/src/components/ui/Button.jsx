@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Button = ({outcls,bttype="button",btnonclick,text="Let's get started"}) => {
+const Button = ({outcls,bttype="button",btnonclick,text="Let's get started",btnHide=true}) => {
 //   console.log(bttype);
   return (<>
-  <div className={`flex items-center ${outcls}`}>
+  {btnHide && <div className={`flex items-center ${outcls}`}>
     <div className="relative group">
         <button type={bttype} onClick={btnonclick}
         className="relative inline-block p-px font-semibold leading-6 text-white bg-a-royalsafforn shadow-2xl cursor-pointer rounded-xl transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
@@ -35,7 +35,7 @@ const Button = ({outcls,bttype="button",btnonclick,text="Let's get started"}) =>
             </span>
         </button>
     </div>
-  </div>
+  </div>}
 
   </>);
 };

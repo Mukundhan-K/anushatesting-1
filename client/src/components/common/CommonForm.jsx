@@ -7,7 +7,7 @@ import Api from '../../utility';
 import { toast } from 'sonner';
 
 const CommonForm = ({formControls, formData, setFormData, onsubmit, defaultOnSubmit=false, formClass, subject="Mail from Anusha Website",
-                      buttonText,btntype="button",btnonclick,btnclass, isEdit = true
+                      buttonText,btntype="button",btnonclick,btnclass, isEdit = true, btnHide=true
 }) => {
 
   const [result, setResult] = useState("");
@@ -284,7 +284,7 @@ const CommonForm = ({formControls, formData, setFormData, onsubmit, defaultOnSub
           ))
         }
       </div>
-      <Button bttype={btntype}  btnonclick={btnonclick} outcls={btnclass} text={buttonText || "Submit"}></Button>
+      <Button bttype={btntype}  btnonclick={btnonclick} outcls={btnclass} text={buttonText || "Submit"} btnHide={btnHide}></Button>
     </form>
   );
 };

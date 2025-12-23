@@ -32,6 +32,8 @@ import Login from './pages/Login';
 
 import { checkUser } from './redux/authSlice';
 import Loader from "./components/common/Loader";
+import ChangeMyPass from './pages/changeMyPass';
+import ResetPassword  from './pages/ResetPassword';
 
 const Home = lazy(() => import("./pages/home"));
 const AdminView = lazy(() => import("./pages/AdminView"));
@@ -43,7 +45,10 @@ function App() {
   const domlocation = useLocation();
   const dispatch = useDispatch();
   const {isLoading} = useSelector((state)=>state.adminProductReducer);
-  const {authChecked, isLoading:loading} = useSelector((state)=>state.authReducer);
+  const {authChecked, isLoading:loading, isAuthenticated, user} = useSelector((state)=>state.authReducer);
+
+  console.log("user : ", isAuthenticated, user);
+  
 
   useEffect(() => {
     if (authChecked ) return;
@@ -144,6 +149,18 @@ function App() {
           <Route path='/login' element={
             <CheckAuth loading1={isLoading} loading2={loading}>
               <Login />
+            </CheckAuth>
+          }></Route>
+
+          <Route path='/changemypass' element={
+            <CheckAuth loading1={isLoading} loading2={loading}>
+              <ChangeMyPass />
+            </CheckAuth>
+          }></Route>
+
+          <Route path='/resetPassword/:token' element={
+            <CheckAuth loading1={isLoading} loading2={loading}>
+              <ResetPassword />
             </CheckAuth>
           }></Route>
 

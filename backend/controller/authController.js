@@ -2,6 +2,8 @@ const path = require("path");
 const userDb = require(path.join(__dirname, "..", "model", "user.js"));
 const {throwError} = require(path.join(__dirname, "..", "middleware", "errorMiddleware.js"))
 const generateToken = require(path.join(__dirname, "..","config","generateToken.js"));
+const crypto = require("crypto");
+const {sendNormalMail} = require(path.join(__dirname, "..", "utils", "mailService.js"));
 
 // =======================================================
 //  create user ===========================================
@@ -140,4 +142,149 @@ async function authUser(req, res, next) {
     };
 };
 
-module.exports = {createUser, loginUser, logoutUser, authUser};
+// =======================================================
+//  forgot Password ===========================================
+
+// route -  post - api/auth/forgotPassword ;
+// access - public ;
+
+async function forgotPassword(req, res, next){
+  try {
+    const { email } = req.body;
+    // console.log("email : ", email);
+    
+    const user = await userDb.findOne({ email });
+    console.log("user : ", user);
+    
+    if (!user) {
+      console.log("user error");
+      return throwError("User not found : ", 404);
+    }
+
+    const resetToken = user.getResetPasswordToken();
+
+    // Use updateOne instead of save to avoid pre-save hooks
+    await userDb.updateOne(
+      { _id: user._id },
+      {
+        $set: {
+          resetPasswordToken: user.resetPasswordToken,
+          resetPasswordExpire: user.resetPasswordExpire
+        }
+      }
+    );
+
+    console.log("user token : ", user, resetToken);
+    // await user.save({ validateBeforeSave: false });
+    // console.log("user token 2 : ", user, resetToken);
+    
+    const resetUrl = `${process.env.ADMIN_URL}/resetPassword/${resetToken}`;
+
+    const message = `
+      <h3>Password Reset</h3>
+      <p>Click the link below to reset your password:</p>
+      <a href="${resetUrl}" target="_blank">${resetUrl}</a>
+      <p>This link expires in 15 minutes.</p>
+    `;
+
+    await sendNormalMail({
+      email : email,
+      subject: "Admin Password Reset",
+      html: message
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Reset link sent to email"
+    });
+
+  } catch (error) {
+    next(error);
+    console.log(error);
+    // res.status(500).json({
+    //   success: false,
+    //   message: error.message || "Error sending reset email"
+    // });
+  }
+};
+
+// =======================================================
+//  reset Password ===========================================
+
+// route -  post - api/auth/forgotPassword ;
+// access - public ;
+
+async function resetPassword (req, res, next) {
+  try {
+
+    const {main, confirm} = req.body.password;
+
+    console.log("pass", req.body,  main, confirm );
+    
+
+    // Validate input
+    if (!main) {
+      return throwError("Password is required : ", 400);
+    };
+    if (main.length < 5) {
+      return throwError("Password must be at least 5 characters : ", 400);
+    };
+    // Optional: validate confirmPassword
+    if (confirm && main !== confirm) {
+      return throwError("Passwords do not match : ", 400);
+    };
+
+    const resetToken = crypto
+      .createHash("sha256")
+      .update(req.params.token)
+      .digest("hex");
+
+      console.log("Looking for token:", resetToken);
+
+    // Find user with valid token
+    const user = await userDb.findOne({
+      resetPasswordToken: resetToken,
+      resetPasswordExpire: { $gt: Date.now() }
+    }).select("+password +resetPasswordToken +resetPasswordExpire");
+
+    if (!user) {
+      return throwError("Invalid or expired token", 404);
+    };
+
+    user.password = main;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+
+    await user.save();
+
+    // // Hash password manually
+    // const salt = await bcrypt.genSalt(10);
+    // const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
+    // // Update user with new password and clear reset fields
+    // await userDb.updateOne(
+    //   { _id: user._id },
+    //   {
+    //     $set: {
+    //       password: hashedPassword
+    //     },
+    //     $unset: {
+    //       resetPasswordToken: "",
+    //       resetPasswordExpire: ""
+    //     }
+    //   }
+    // );
+
+    res.status(200).json({
+      success: true,
+      message: "Password reset successful"
+    });
+
+  } catch (error) {
+    console.log(error);
+    
+    next(error);
+  }
+};
+
+module.exports = {createUser, loginUser, logoutUser, authUser, forgotPassword, resetPassword};

@@ -13,11 +13,12 @@ const { loginValidator } = require(path.join(__dirname,"..", "validators", "auth
 const blockDisposable = require(path.join(__dirname, "..", "utils", "blockDisposableMail.js"));
 const checkMxMiddleware = require(path.join(__dirname, "..", "utils", "verifyMxRecord.js"));
 
-const {createUser, loginUser, logoutUser, authUser} = require(path.join(__dirname,"..", "controller", "authController.js"));
+const {createUser, loginUser, logoutUser, authUser, forgotPassword, resetPassword} = require(path.join(__dirname,"..", "controller", "authController.js"));
 
 // create user
 // api - /api/auth/signup
-router.post("/createuser", contactLimiter, loginLimiter, blockDisposable, checkMxMiddleware, loginValidator, validate, createUser);
+// router.post("/createuser", contactLimiter, loginLimiter, blockDisposable, checkMxMiddleware, loginValidator, validate, createUser);
+// router.post("/createuser", createUser);
 
 // login user
 // api - /api/auth/login
@@ -39,5 +40,14 @@ router.get("/logout", logoutUser);
 // auth user
 // api - /api/auth/auth
 router.get("/admin", authMiddleware, authUser);
+
+// forgot password
+// api - /api/auth/forgotPassword
+router.post("/forgotPassword", forgotPassword);
+
+// reset password
+// api - /api/auth/resetPassword/:any
+router.put("/resetPassword/:token", resetPassword);
+
 
 module.exports = router;

@@ -151,44 +151,43 @@ const ViewProjects = () => {
     <section className='px-4'>
       <div className='container mx-auto'>
 
-      <div className="flex justify-between items-center mb-5">
-        <h2 className="text-xl font-semibold">Project Details</h2>
+        <div className="flex justify-between items-center mb-5">
+          <h2 className="text-xl font-semibold">Project Details</h2>
 
-        <div className="flex gap-3">
-          {!isEdit ? (
+          <div className="flex gap-3">
+            {!isEdit ? (
+              <button
+                className="px-4 py-2 bg-blue-600 text-white rounded-xl"
+                onClick={() => setIsEdit(true)}
+              >
+                Edit
+              </button>
+            ) : (
+              <>
+                <button
+                  className="px-4 py-2 bg-green-600 text-white rounded-xl"
+                  onClick={(e) => handleForm(e)}
+                >
+                  Update
+                </button>
+
+                <button
+                  className="px-4 py-2 bg-gray-400 text-white rounded-xl"
+                  onClick={() => setIsEdit(false)}
+                >
+                  Cancel
+                </button>
+              </>
+            )}
+
             <button
-              className="px-4 py-2 bg-blue-600 text-white rounded-xl"
-              onClick={() => setIsEdit(true)}
+              className="px-4 py-2 bg-red-600 text-white rounded-xl"
+              onClick={handleDeleteProject}
             >
-              Edit
+              Delete
             </button>
-          ) : (
-            <>
-              <button
-                className="px-4 py-2 bg-green-600 text-white rounded-xl"
-                onClick={(e) => handleForm(e)}
-              >
-                Update
-              </button>
-
-              <button
-                className="px-4 py-2 bg-gray-400 text-white rounded-xl"
-                onClick={() => setIsEdit(false)}
-              >
-                Cancel
-              </button>
-            </>
-          )}
-
-          <button
-            className="px-4 py-2 bg-red-600 text-white rounded-xl"
-            onClick={handleDeleteProject}
-          >
-            Delete
-          </button>
+          </div>
         </div>
-      </div>
-
 
         <div>
 
@@ -211,6 +210,7 @@ const ViewProjects = () => {
               buttonText={"Book Free Consultation"}
               btntype='submit'
               isEdit={isEdit}
+              btnHide={false}
           />
 
         </div>

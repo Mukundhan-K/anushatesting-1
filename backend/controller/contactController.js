@@ -1,7 +1,7 @@
 const path = require("path");
 const {throwError} = require(path.join(__dirname, "..", "middleware", "errorMiddleware.js"));
 
-const sendMail = require(path.join(__dirname, "..", "utils", "mailService.js"));
+const {sendMail} = require(path.join(__dirname, "..", "utils", "mailService.js"));
 // const validateEmail = require(path.join(__dirname, "..", "utils", "validateEmail"));
 const sanitize = require(path.join(__dirname, "..", "utils", "sanitize.js"));
 const scoreSubject = require(path.join(__dirname, "..", "utils", "subjectScore"));

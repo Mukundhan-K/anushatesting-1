@@ -80,6 +80,18 @@ const AddProjects = () => {
     <section className='px-4'>
       <div className='container mx-auto'>
 
+        <div className="flex justify-between items-center pb-5">
+          <h2 className="text-xl font-semibold">Add Project</h2>
+
+          <button
+            className="px-4 py-2 bg-green-600 text-white rounded-xl"
+            onClick={(e) => handleForm(e)}
+          >
+            Add Project
+          </button>
+      </div>
+
+
         <div>
 
           <ImageUpload file={imageFile} setfile={setImageFile} />
@@ -93,6 +105,7 @@ const AddProjects = () => {
               formClass={`grid grid-cols-1 gap-3`}
               buttonText={"Book Free Consultation"}
               btntype='submit'
+              btnHide={false}
           />
 
         </div>
