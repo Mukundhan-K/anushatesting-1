@@ -1,7 +1,5 @@
 const path = require("path");
 const router = require("express").Router();
-const authMiddleware = require(path.join(__dirname,"..","middleware","authMiddleware.js"));
-const upload = require(path.join(__dirname,"..","middleware","multer.js"));
 
 const { listProject, singleProject } = require(path.join(__dirname,"..", "controller", "shopController.js"));
 

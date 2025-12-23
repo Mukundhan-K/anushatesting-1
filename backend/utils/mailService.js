@@ -59,7 +59,9 @@ async function sendNormalMail({ email, subject, html}) {
         pass: process.env.MAIL_PASS,       // app password
       },
     });
-  
+  await transporter.verify();
+console.log("SMTP connection successful");
+
   /** Password Reset Email **/
     await transporter.sendMail({
       from: `"Anusha Structures" <${process.env.MAIL_USER}>`,
