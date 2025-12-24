@@ -24,3 +24,7 @@ connectCloudinary();
 // app.listen(port, ()=>{
 //     console.log("server run @ port : ", port);
 // });
+
+
+// ✅ THIS IS MANDATORY FOR VERCEL
+module.exports = app;
