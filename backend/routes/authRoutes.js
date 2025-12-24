@@ -1,6 +1,5 @@
 const path = require("path");
 const router = require("express").Router();
-const rateLimit = require('express-rate-limit');
 
 const authMiddleware = require(path.join(__dirname,"..","middleware","authMiddleware.js"));
 const {loginLimiter} = require(path.join(__dirname,"..", "middleware", "slowDownLimiter.js"));
@@ -43,11 +42,26 @@ router.get("/admin", authMiddleware, authUser);
 
 // forgot password
 // api - /api/auth/forgotPassword
-router.post("/forgotPassword", forgotPassword);
+router.post("/forgotPassword",
+  // 1️⃣ Stop abuse ASAP
+  contactLimiter, loginLimiter,
+  // 2️⃣ Block disposable / invalid emails (cheap checks first)
+  blockDisposable, checkMxMiddleware,
+  // 3️⃣ Validate request body
+   validate,
+  // 4️⃣ Controller (DB logic)
+  forgotPassword
+);
 
 // reset password
 // api - /api/auth/resetPassword/:any
-router.put("/resetPassword/:token", resetPassword);
-
+router.put("/resetPassword/:token",
+  // 1️⃣ Stop abuse ASAP
+  contactLimiter, loginLimiter,
+  // 3️⃣ Validate request body
+   validate,
+  // 4️⃣ Controller (DB logic)
+  resetPassword
+);
 
 module.exports = router;
